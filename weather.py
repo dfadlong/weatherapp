@@ -1,31 +1,37 @@
 key = '9dd24f6d5670fd19d270ff159f794d07'
 
+import urllib
 import urllib2
 import json
+import sys
 
 
 def fetchWeatherData(location):
   address = ('http://api.openweathermap.org/data/2.5/'
-	'weather?q=' + location + '&appid=' + key)
+	'weather?q=' + urllib.quote(location) + '&appid=' + key)
   request = urllib2.Request(address)
   response = urllib2.urlopen(request)
   reply = response.read()
   return reply
 
-def getTemperature(location):
-  data = json.loads(fetchWeatherData(location))
+def getTemperature(data):
+  data = json.loads(data)
   temp = data['main']['temp']
   fahrenheight = temp * 9 / 5 - 459.67
   return fahrenheight
 
-def getHumidity(location):
-  data = json.loads(fetchWeatherData(location))  
+def getHumidity(data):
+  data = json.loads(data)  
   humidity = data['main']['humidity']
   return humidity
 
-nyc_temp = getTemperature('NYC')
+print('Enter a location:')
+location = sys.stdin.readline()
+data = fetchWeatherData(location)
+
+nyc_temp = getTemperature(data)
 print(nyc_temp)
-nyc_humidity = getHumidity('NYC')
+nyc_humidity = getHumidity(data)
 print(nyc_humidity)
 
 
