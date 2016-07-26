@@ -25,13 +25,3 @@ def getHumidity(data):
   humidity = data['main']['humidity']
   return humidity
 
-print('Enter a location:')
-location = sys.stdin.readline()
-data = fetchWeatherData(location)
-
-nyc_temp = getTemperature(data)
-print(nyc_temp)
-nyc_humidity = getHumidity(data)
-print(nyc_humidity)
-
-
