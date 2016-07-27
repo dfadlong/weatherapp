@@ -25,3 +25,7 @@ def getHumidity(data):
   humidity = data['main']['humidity']
   return humidity
 
+def getDescription(data):
+  data = json.loads(data)  
+  description = data['weather'][0]['description']
+  return description

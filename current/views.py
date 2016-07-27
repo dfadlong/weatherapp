@@ -19,11 +19,13 @@ def greeting(request):
 
   temp = getTemperature(data)
   humidity = getHumidity(data)
+  description = getDescription(data)
 
   template = loader.get_template(
   	'current/location.html')
   context = {'location': location,
              'temp': temp,
-             'humidity': humidity}
+             'humidity': humidity,
+             'description': description}
   output = template.render(context)
   return HttpResponse(output)
